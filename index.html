@@ -357,6 +357,28 @@
         </div>
     </section>
 
+    <!-- Publication Citation Modal -->
+    <div class="cite-modal-overlay" id="cite-modal-overlay" aria-hidden="true">
+        <div class="cite-modal" role="dialog" aria-modal="true" aria-labelledby="cite-modal-heading">
+            <div class="cite-modal-header">
+                <div>
+                    <span class="cite-modal-kicker">IEEE STYLE</span>
+                    <h3 id="cite-modal-heading">Cite this publication</h3>
+                </div>
+                <button type="button" class="cite-modal-close" id="cite-modal-close" aria-label="Close citation dialog">&times;</button>
+            </div>
+            <p class="cite-modal-title" id="cite-modal-title"></p>
+            <div class="cite-modal-text" id="cite-modal-text"></div>
+            <div class="cite-modal-actions">
+                <button type="button" class="cite-copy-btn" id="cite-copy-btn">
+                    <i class="bi bi-clipboard"></i>
+                    <span>Copy citation</span>
+                </button>
+                <span class="cite-copy-status" id="cite-copy-status" role="status" aria-live="polite"></span>
+            </div>
+        </div>
+    </div>
+
     <!-- Vlog -->
     <section class="bg-gradient-primary-to-secondary-light mt4 md4" id="vlog">
         <div class="container px-5">
@@ -1075,7 +1097,117 @@
       return [pub.month, pub.year].filter(Boolean).join(' ');
     }
 
-    function createPubCard(pub) {
+    function normalizePages(pages) {
+      return (pages || '').replace(/^pp?\.\s*/i, '');
+    }
+
+    function extractDoi(url) {
+      const match = (url || '').match(/doi\.org\/(.+)$/i);
+      return match ? decodeURIComponent(match[1]) : '';
+    }
+
+    function buildIeeeCitation(pub) {
+      const details = [];
+      const pages = normalizePages(pub.pages);
+      let venue = pub.venue || '';
+
+      if (pub.type === 'conference' && !/^in\s+/i.test(venue)) {
+        venue = 'in ' + venue;
+      }
+
+      if (pub.vol) details.push('vol. ' + pub.vol);
+      if (pub.no) details.push('no. ' + pub.no);
+      if (pages) details.push('pp. ' + pages);
+
+      const date = buildPubDate(pub);
+      if (date) details.push(date);
+      if (pub.type === 'journal' && pub.note) details.push(pub.note);
+
+      let citation = pub.authors + ', “' + pub.title + ',” ' + venue;
+      if (details.length) citation += ', ' + details.join(', ');
+
+      const doi = extractDoi(pub.doi);
+      if (doi) {
+        citation += ', doi: ' + doi;
+      } else if (pub.doi) {
+        citation += ', [Online]. Available: ' + pub.doi;
+      }
+
+      return citation.replace(/\s+/g, ' ').replace(/\s+([,.])/g, '$1') + '.';
+    }
+
+    let lastCiteTrigger = null;
+
+    function openCiteModal(pub, trigger) {
+      const overlay = document.getElementById('cite-modal-overlay');
+      const title = document.getElementById('cite-modal-title');
+      const text = document.getElementById('cite-modal-text');
+      const status = document.getElementById('cite-copy-status');
+      const copyLabel = document.querySelector('#cite-copy-btn span');
+      if (!overlay || !title || !text) return;
+
+      lastCiteTrigger = trigger || null;
+      title.textContent = pub.title;
+      text.textContent = buildIeeeCitation(pub);
+      if (status) status.textContent = '';
+      if (copyLabel) copyLabel.textContent = 'Copy citation';
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('cite-modal-open');
+
+      const closeButton = document.getElementById('cite-modal-close');
+      if (closeButton) closeButton.focus();
+    }
+
+    function closeCiteModal() {
+      const overlay = document.getElementById('cite-modal-overlay');
+      if (!overlay || !overlay.classList.contains('active')) return;
+
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('cite-modal-open');
+      if (lastCiteTrigger) lastCiteTrigger.focus();
+      lastCiteTrigger = null;
+    }
+
+    function copyCitation() {
+      const textElement = document.getElementById('cite-modal-text');
+      const status = document.getElementById('cite-copy-status');
+      const copyLabel = document.querySelector('#cite-copy-btn span');
+      if (!textElement) return;
+
+      const citation = textElement.textContent;
+
+      function showCopied() {
+        if (status) status.textContent = 'Copied to clipboard';
+        if (copyLabel) copyLabel.textContent = 'Copied';
+      }
+
+      function fallbackCopy() {
+        const textarea = document.createElement('textarea');
+        textarea.value = citation;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        const copied = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        return copied;
+      }
+
+      if (fallbackCopy()) {
+        showCopied();
+      } else if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(citation).then(showCopied).catch(function() {
+          if (status) status.textContent = 'Select the citation and copy it manually';
+        });
+      } else {
+        if (status) status.textContent = 'Select the citation and copy it manually';
+      }
+    }
+
+    function createPubCard(pub, index) {
       let jcrTagHtml = '';
       if (pub.jcr === 'Q1') {
         jcrTagHtml = '<span class="jcr-tag jcr-q1-shimmer">JCR Q1</span>';
@@ -1091,6 +1223,7 @@
       if (pub.arxiv) {
         linksHtml += '<a href="https://arxiv.org/abs/' + pub.arxiv + '" class="pub-link" target="_blank" rel="noopener">arXiv:' + pub.arxiv + '</a>';
       }
+      linksHtml += '<button type="button" class="cite-btn" data-pub-index="' + index + '" aria-label="Cite publication"><i class="bi bi-quote"></i> Cite</button>';
 
       const typeLabel = { journal: 'Journal', conference: 'Conference' }[pub.type] || '';
 
@@ -1210,6 +1343,32 @@
           currentFilter = btn.getAttribute('data-filter');
           applyFilters();
         });
+      });
+
+      if (pubList) {
+        pubList.addEventListener('click', function(event) {
+          const button = event.target.closest('.cite-btn');
+          if (!button) return;
+          const index = parseInt(button.getAttribute('data-pub-index'), 10);
+          if (!Number.isNaN(index) && publications[index]) {
+            openCiteModal(publications[index], button);
+          }
+        });
+      }
+
+      const citeOverlay = document.getElementById('cite-modal-overlay');
+      const citeClose = document.getElementById('cite-modal-close');
+      const citeCopy = document.getElementById('cite-copy-btn');
+
+      if (citeClose) citeClose.addEventListener('click', closeCiteModal);
+      if (citeCopy) citeCopy.addEventListener('click', copyCitation);
+      if (citeOverlay) {
+        citeOverlay.addEventListener('click', function(event) {
+          if (event.target === citeOverlay) closeCiteModal();
+        });
+      }
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') closeCiteModal();
       });
     });
     </script>
