@@ -810,7 +810,8 @@ section .main-body{
 .pub-links {
     margin-top: 12px;
     display: flex;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .pub-link {
@@ -829,6 +830,170 @@ section .main-body{
 
 .pub-link:hover {
     background: #a8ebc0;
+}
+
+.cite-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border: 1px solid #a7d8ee;
+    border-radius: 6px;
+    background: #e9f7fc;
+    color: #08789d;
+    font-family: inherit;
+    font-size: 0.83rem;
+    font-weight: 600;
+    line-height: inherit;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.cite-btn:hover,
+.cite-btn:focus-visible {
+    background: #cdeffc;
+    border-color: #62bddc;
+    outline: none;
+    transform: translateY(-1px);
+}
+
+body.cite-modal-open {
+    overflow: hidden;
+}
+
+.cite-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(4, 13, 18, 0.72);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.cite-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cite-modal {
+    width: min(680px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 24px;
+    border: 1px solid rgba(29, 185, 84, 0.34);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.2s;
+}
+
+.cite-modal-overlay.active .cite-modal {
+    transform: translateY(0) scale(1);
+}
+
+.cite-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.cite-modal-kicker {
+    display: inline-block;
+    margin-bottom: 4px;
+    color: #138a43;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+.cite-modal-header h3 {
+    margin: 0;
+    color: #17212b;
+    font-size: 1.3rem;
+}
+
+.cite-modal-close {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #eef2f4;
+    color: #334155;
+    font-size: 1.55rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.cite-modal-close:hover,
+.cite-modal-close:focus-visible {
+    background: #dfe7eb;
+    outline: 2px solid #1db954;
+    outline-offset: 2px;
+}
+
+.cite-modal-title {
+    margin: 18px 0 10px;
+    color: #52606d;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.cite-modal-text {
+    padding: 18px;
+    border-left: 4px solid #1db954;
+    border-radius: 8px;
+    background: #f5faf7;
+    color: #1f2933;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+    user-select: text;
+}
+
+.cite-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.cite-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: #1db954;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.cite-copy-btn:hover,
+.cite-copy-btn:focus-visible {
+    background: #149342;
+    outline: none;
+    transform: translateY(-1px);
+}
+
+.cite-copy-status {
+    color: #138a43;
+    font-size: 0.82rem;
+    font-weight: 600;
 }
 
 /* ===== JCR Q1 Shimmer Rainbow Tag ===== */
@@ -1343,6 +1508,10 @@ section .main-body{
     .pub-link {
         padding: 10px 16px;
     }
+
+    .cite-btn {
+        padding: 10px 16px;
+    }
 }
 
 /* ===== Extra-small mobile (<=480px) ===== */
@@ -1377,6 +1546,24 @@ section .main-body{
 
     .pub-cover img {
         width: 60px;
+    }
+
+    .cite-modal-overlay {
+        padding: 12px;
+    }
+
+    .cite-modal {
+        padding: 18px;
+    }
+
+    .cite-modal-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .cite-copy-btn {
+        justify-content: center;
+        width: 100%;
     }
 
     .vlog-card {
