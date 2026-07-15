@@ -3,7 +3,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-7WD1-black?logo=github)](https://github.com/7WD1)
 [![Email](https://img.shields.io/badge/Email-verified@ieee.org-red?logo=ieee&logoColor=white)](mailto:verified@ieee.org)
 
-Wen-Dong Jiang (Graduate Student Member, IEEE) received the B.S. degree in multimedia and game science development from the Lunghwa University of Science and Technology, Taoyuan, Taiwan, in 2021, the M.S. degree in computer science and information engineering from Ming Chuan University, Taoyuan, Taiwan, in 2023, and the Ph.D. degree in computer science and information engineering from Tamkang University, New Taipei City, Taiwan, in 2026.
+Wen-Dong Jiang (Member, IEEE) received the B.S. degree in multimedia and game science development from the Lunghwa University of Science and Technology, Taoyuan, Taiwan, in 2021, the M.S. degree in computer science and information engineering from Ming Chuan University, Taoyuan, Taiwan, in 2023, and the Ph.D. degree in computer science and information engineering from Tamkang University, New Taipei City, Taiwan, in 2026.
 
 His research interests focus on interpretable machine learning and explainable artificial intelligence (XAI), with applications spanning smart cities, intelligent transportation systems, anomaly detection, and violence detection. He has authored multiple papers in high-impact journals, including IEEE Trans. Syst., Man, Cybern.: Syst., IEEE Trans. Intell. Transp. Syst., IEEE Trans. Big Data, IEEE Trans. Emerg. Top. Comput. Intell., Inf. Process. Manag., and Expert Syst. Appl.
 
