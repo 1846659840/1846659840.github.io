@@ -5,7 +5,7 @@
 
 Wen-Dong Jiang (Member, IEEE) received the B.S. degree in multimedia and game science development from the Lunghwa University of Science and Technology, Taoyuan, Taiwan, in 2021, the M.S. degree in computer science and information engineering from Ming Chuan University, Taoyuan, Taiwan, in 2023, and the Ph.D. degree in computer science and information engineering from Tamkang University, New Taipei City, Taiwan, in 2026.
 
-His research interests focus on interpretable machine learning and explainable artificial intelligence (XAI), with applications spanning smart cities, intelligent transportation systems, anomaly detection, and violence detection. He has authored multiple papers in high-impact journals, including IEEE Trans. Syst., Man, Cybern.: Syst., IEEE Trans. Intell. Transp. Syst., IEEE Trans. Big Data, IEEE Trans. Emerg. Top. Comput. Intell., Inf. Process. Manag., and Expert Syst. Appl.
+His research interests focus on interpretable machine learning and explainable artificial intelligence (XAI), with applications spanning smart cities, intelligent transportation systems, anomaly detection, and violence detection. He has authored multiple papers in high-impact journals, including IEEE Trans. Syst., Man, Cybern.: Syst., IEEE Trans. Intell. Transp. Syst., IEEE Trans. Big Data, IEEE J. Biomed. Health Inform., IEEE Trans. Emerg. Top. Comput. Intell., Inf. Process. Manag., and Expert Syst. Appl.
 
 Dr. Jiang is expected to join Ningbo University, Ningbo, Zhejiang, in September 2026. Currently, Dr. Jiang is seeking like-minded collaborators to explore the secrets of explainability together. He can be reached at [wendongjiang@ieee.org](mailto:wendongjiang@ieee.org).
 
