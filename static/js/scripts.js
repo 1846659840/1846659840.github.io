@@ -6,21 +6,10 @@
 
     var homeContent = { en: '', zh: '' };
 
-    function safeTypeset() {
-        if (window.MathJax && window.MathJax.typesetPromise) {
-            MathJax.typesetPromise().catch(function(e) {
-                console.warn('MathJax typeset failed:', e);
-            });
-        } else if (window.MathJax && window.MathJax.typeset) {
-            try { MathJax.typeset(); } catch (e) { /* ignore */ }
-        }
-    }
-
     function applyLang(lang) {
         var el = document.getElementById('home-md');
         if (el && homeContent[lang]) {
             el.innerHTML = homeContent[lang];
-            safeTypeset();
         }
         var btn = document.getElementById('lang-toggle');
         if (btn) {

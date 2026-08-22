@@ -14,45 +14,19 @@
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
 
-    <!-- Google fonts-->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&display=swap"
-        rel="stylesheet" />
-
     <!-- Core theme CSS (includes Bootstrap)-->
     <link type="text/css" href="static/css/styles.css" rel="stylesheet" />
     <link type="text/css" href="static/css/main.css" rel="stylesheet" />
 
     <!-- Bootstrap core JS-->
-    <script type="text/javascript" src="static/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" defer src="static/js/bootstrap.bundle.min.js"></script>
 
     <!-- Markdown -->
-    <script type="text/javascript" src="static/js/marked.min.js"></script>
-
-    <!-- Mathematics -->
-    <script>
-        MathJax = {
-            tex: {
-                packages: {},
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
-                processEscapes: false,
-                processEnvironments: true,
-                processRefs: true,
-            }
-        };
-    </script>
-    <script type="text/javascript" id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script type="text/javascript" defer src="static/js/marked.min.js"></script>
 
     <!-- Core JS-->
-    <script type="text/javascript" src="static/js/js-yaml.min.js"></script>
-    <script type="text/javascript" src="static/js/scripts.js"></script>
+    <script type="text/javascript" defer src="static/js/js-yaml.min.js"></script>
+    <script type="text/javascript" defer src="static/js/scripts.js"></script>
 
 </head>
 
@@ -74,6 +48,13 @@
     </div>
     <script>
     (function(){
+        /* Skip the boot animation on repeat visits within the same session */
+        try {
+            if (sessionStorage.getItem('wdj-breach-done')) {
+                document.getElementById('loading-screen').style.display = 'none';
+                return;
+            }
+        } catch (e) { /* storage unavailable: play the animation */ }
         var canvas = document.getElementById('matrix-canvas');
         var ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -140,7 +121,7 @@
             if (charIdx < lines[lineIdx].length) {
                 terminal.textContent += lines[lineIdx].charAt(charIdx);
                 charIdx++;
-                typeTimer = setTimeout(typeLine, (8 + Math.random() * 15) / speedMultiplier);
+                typeTimer = setTimeout(typeLine, (3 + Math.random() * 6) / speedMultiplier);
             } else {
                 terminal.textContent += '\n';
                 terminal.scrollTop = terminal.scrollHeight;
@@ -149,11 +130,12 @@
                 progress = Math.min(100, Math.round((lineIdx / lines.length) * 100));
                 bar.style.width = progress + '%';
                 status.textContent = progress + '% COMPLETE';
-                typeTimer = setTimeout(typeLine, (60 + Math.random() * 100) / speedMultiplier);
+                typeTimer = setTimeout(typeLine, (25 + Math.random() * 40) / speedMultiplier);
             }
         }
 
         function finishLoading() {
+            try { sessionStorage.setItem('wdj-breach-done', '1'); } catch (e) {}
             glitch.classList.add('glitch-done');
             status.textContent = 'ACCESS GRANTED';
             status.style.color = '#0f0';
@@ -165,11 +147,11 @@
                 clearInterval(skullFloatInterval);
                 window.removeEventListener('resize', resizeCanvas);
                 ls.classList.add('crash-out');
-                setTimeout(function() { ls.style.display = 'none'; }, 800);
-            }, 400);
+                setTimeout(function() { ls.style.display = 'none'; }, 400);
+            }, 250);
         }
 
-        setTimeout(typeLine, 500);
+        setTimeout(typeLine, 250);
         var glitchInterval = setInterval(function() {
             glitch.style.transform = 'translate(' + (Math.random()*6-3) + 'px,' + (Math.random()*4-2) + 'px)';
         }, 80);
@@ -206,8 +188,6 @@
     })();
     </script>
 
-    <!-- Snowfall -->
-    <div id="snow-container" aria-hidden="true"></div>
     <!-- Crabs -->
     <div id="crab-container" aria-hidden="true"></div>
     <script>document.body.classList.remove('no-js');</script>
@@ -258,44 +238,44 @@
     <!-- Honors Marquee Strip -->
     <div class="honor-marquee" id="honor-marquee">
         <div class="honor-marquee-track" id="honor-marquee-track">
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor1.png" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor2.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor3.png" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor4.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor5.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor6.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor7.png" alt="Conference Group Photo" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor1.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor2.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor3.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor4.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor5.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor6.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor7.webp" alt="Conference Group Photo" loading="lazy"></div>
             <!-- duplicate set 1 -->
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor1.png" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor2.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor3.png" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor4.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor5.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor6.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor7.png" alt="Conference Group Photo" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor1.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor2.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor3.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor4.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor5.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor6.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor7.webp" alt="Conference Group Photo" loading="lazy"></div>
             <!-- duplicate set 2 -->
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor1.png" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor2.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor3.png" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor4.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor5.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor6.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor7.png" alt="Conference Group Photo" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor1.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor2.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor3.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor4.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor5.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor6.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor7.webp" alt="Conference Group Photo" loading="lazy"></div>
             <!-- duplicate set 3 -->
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor1.png" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor2.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor3.png" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor4.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor5.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor6.jpg" alt="Honor" loading="lazy"></div>
-            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor7.png" alt="Conference Group Photo" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor1.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor2.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor3.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor4.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor5.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor6.webp" alt="Honor" loading="lazy"></div>
+            <div class="honor-marquee-item"><img src="static/assets/img/honors/honor7.webp" alt="Conference Group Photo" loading="lazy"></div>
         </div>
     </div>
 
     <!-- Photo -->
     <div class="container px-5">
         <div id="avatar">
-            <img class="shadow" src="static/assets/img/photo.png">
+            <img class="shadow" src="static/assets/img/photo.webp">
         </div>
     </div>
 
@@ -493,21 +473,21 @@
                 <button class="collab-arrow collab-arrow-left" id="collab-prev" aria-label="Previous"><i class="bi bi-chevron-left"></i></button>
                 <div class="collab-track-wrapper" id="collab-wrapper">
                     <div class="collab-track" id="collab-track">
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab1.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab2.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab3.jpg" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab4.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab5.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab6.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab7.png" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab1.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab2.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab3.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab4.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab5.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab6.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab7.webp" alt="Collaborator" loading="lazy"></div>
                         <!-- duplicate for seamless loop -->
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab1.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab2.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab3.jpg" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab4.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab5.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab6.png" alt="Collaborator" loading="lazy"></div>
-                        <div class="collab-item"><img src="static/assets/img/collaborators/collab7.png" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab1.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab2.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab3.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab4.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab5.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab6.webp" alt="Collaborator" loading="lazy"></div>
+                        <div class="collab-item"><img src="static/assets/img/collaborators/collab7.webp" alt="Collaborator" loading="lazy"></div>
                     </div>
                 </div>
                 <button class="collab-arrow collab-arrow-right" id="collab-next" aria-label="Next"><i class="bi bi-chevron-right"></i></button>
@@ -525,9 +505,13 @@
                 var raf = null;
                 var paused = false;
 
+                /* Measure once and cache: reading offsetWidth every frame forces reflow */
+                var itemWidthCache = 0;
                 function getItemWidth() {
-                    return (items[0] ? items[0].offsetWidth : 180) + 28;
+                    if (!itemWidthCache) itemWidthCache = (items[0] ? items[0].offsetWidth : 180) + 28;
+                    return itemWidthCache;
                 }
+                window.addEventListener('resize', function() { itemWidthCache = 0; });
 
                 function animate() {
                     if (!paused) {
@@ -587,326 +571,6 @@
         </div>
     </section>
 
-    <!-- Music Player (NetEase Cloud Music Style) -->
-    <div id="music-player" class="music-player player-collapsed">
-        <div class="player-entrance-overlay" id="player-entrance-overlay"></div>
-        <audio id="music-audio" preload="auto"></audio>
-        <div class="player-disc" id="player-disc">
-            <div class="player-disc-inner">
-                <div class="player-needle" id="player-needle"></div>
-                <div class="player-vinyl" id="player-vinyl">
-                    <div class="player-vinyl-center"></div>
-                </div>
-            </div>
-        </div>
-        <div class="player-info">
-            <div class="player-song" id="player-song">好運來</div>
-        </div>
-        <div class="player-progress" id="player-progress">
-            <div class="player-progress-bar" id="player-progress-bar"></div>
-        </div>
-        <div class="player-time">
-            <span id="player-time-current">0:00</span>
-            <span id="player-time-total">0:00</span>
-        </div>
-        <div class="player-volume-row">
-            <button class="player-mute-btn" id="player-mute-btn" aria-label="Mute">
-                <i class="bi bi-volume-up-fill" id="player-mute-icon"></i>
-            </button>
-            <input type="range" class="player-volume-slider" id="player-volume-slider" min="0" max="1" step="0.01" value="0.1" aria-label="Volume">
-        </div>
-        <div class="player-controls">
-            <button class="player-prev-btn" id="player-prev-btn" aria-label="Previous">
-                <i class="bi bi-skip-start-fill"></i>
-            </button>
-            <button class="player-btn" id="player-btn" aria-label="Play">
-                <i class="bi bi-play-fill" id="player-icon"></i>
-            </button>
-            <button class="player-next-btn" id="player-next-btn" aria-label="Next">
-                <i class="bi bi-skip-end-fill"></i>
-            </button>
-        </div>
-        <button class="player-toggle" id="player-toggle" aria-label="Close player">
-            <i class="bi bi-x-lg"></i>
-        </button>
-    </div>
-    <button class="player-float-btn visible" id="player-float-btn" aria-label="Open music player">
-        <i class="bi bi-music-note-beamed"></i>
-    </button>
-    <script>
-    (function(){
-        var audio = document.getElementById('music-audio');
-        audio.volume = 0.1;
-        var btn = document.getElementById('player-btn');
-        var icon = document.getElementById('player-icon');
-        var disc = document.getElementById('player-disc');
-        var vinyl = document.getElementById('player-vinyl');
-        var needle = document.getElementById('player-needle');
-        var progressBar = document.getElementById('player-progress-bar');
-        var progressWrap = document.getElementById('player-progress');
-        var timeCurrent = document.getElementById('player-time-current');
-        var timeTotal = document.getElementById('player-time-total');
-        var toggle = document.getElementById('player-toggle');
-        var player = document.getElementById('music-player');
-        var muteBtn = document.getElementById('player-mute-btn');
-        var muteIcon = document.getElementById('player-mute-icon');
-        var volumeSlider = document.getElementById('player-volume-slider');
-        var entranceOverlay = document.getElementById('player-entrance-overlay');
-        var prevBtn = document.getElementById('player-prev-btn');
-        var nextBtn = document.getElementById('player-next-btn');
-        var songTitle = document.getElementById('player-song');
-        var playing = false;
-        var noteTimer = null;
-        var lastVolume = 0.1;
-
-        var playlist = [
-            { title: '好運來', src: 'static/assets/audio/BGM.mp3', cover: 'static/assets/img/album-cover.png' },
-            { title: '辣妹子', src: 'static/assets/audio/M500002yHqge3aMpSu.mp3', cover: 'static/assets/img/lameizi-cover.png' }
-        ];
-        var songIndex = 0;
-
-        function loadSong(index) {
-            songIndex = index;
-            if (songIndex < 0) songIndex = playlist.length - 1;
-            if (songIndex >= playlist.length) songIndex = 0;
-            var song = playlist[songIndex];
-            audio.src = song.src;
-            songTitle.textContent = song.title;
-            vinyl.style.backgroundImage = "url('" + song.cover + "')";
-            timeCurrent.textContent = '0:00';
-            timeTotal.textContent = '0:00';
-            progressBar.style.width = '0%';
-        }
-
-        loadSong(0);
-
-        function formatTime(s) {
-            if (isNaN(s)) return '0:00';
-            var m = Math.floor(s / 60);
-            var sec = Math.floor(s % 60);
-            return m + ':' + (sec < 10 ? '0' : '') + sec;
-        }
-
-        function setPlayingState() {
-            icon.className = 'bi bi-pause-fill';
-            vinyl.style.animationPlayState = 'running';
-            needle.classList.add('needle-active');
-            playing = true;
-        }
-
-        function setPausedState() {
-            icon.className = 'bi bi-play-fill';
-            vinyl.style.animationPlayState = 'paused';
-            needle.classList.remove('needle-active');
-            playing = false;
-        }
-
-        function updateMuteIcon() {
-            if (audio.muted || audio.volume === 0) {
-                muteIcon.className = 'bi bi-volume-mute-fill';
-            } else if (audio.volume < 0.5) {
-                muteIcon.className = 'bi bi-volume-down-fill';
-            } else {
-                muteIcon.className = 'bi bi-volume-up-fill';
-            }
-        }
-
-        /* Volume controls */
-        volumeSlider.addEventListener('input', function() {
-            var val = parseFloat(volumeSlider.value);
-            audio.volume = val;
-            if (val > 0 && audio.muted) audio.muted = false;
-            updateMuteIcon();
-        });
-
-        muteBtn.addEventListener('click', function() {
-            if (audio.muted || audio.volume === 0) {
-                audio.muted = false;
-                if (audio.volume === 0) {
-                    audio.volume = lastVolume > 0 ? lastVolume : 0.5;
-                    volumeSlider.value = audio.volume;
-                }
-            } else {
-                lastVolume = audio.volume;
-                audio.muted = true;
-            }
-            updateMuteIcon();
-        });
-
-        audio.addEventListener('volumechange', updateMuteIcon);
-
-        /* Floating music notes */
-        var noteSymbols = ['♩','♪','♫','♬','♪','♫'];
-        function spawnNote() {
-            if (!playing) return;
-            var note = document.createElement('div');
-            note.className = 'music-note';
-            note.textContent = noteSymbols[Math.floor(Math.random() * noteSymbols.length)];
-
-            var playerRect = player.getBoundingClientRect();
-            var startX = playerRect.left + playerRect.width / 2 + (Math.random() - 0.5) * 80;
-            var startY = playerRect.top + 10;
-            note.style.left = startX + 'px';
-            note.style.top = startY + 'px';
-
-            var hue = Math.random() * 360;
-            note.style.color = 'hsl(' + hue + ', 70%, ' + (55 + Math.random()*20) + '%)';
-            note.style.fontSize = (22 + Math.random() * 16) + 'px';
-
-            var dx = (Math.random() - 0.5) * 120;
-            note.style.setProperty('--dx1', (dx * 0.2) + 'px');
-            note.style.setProperty('--dx2', (dx * 0.5) + 'px');
-            note.style.setProperty('--dx3', (dx * 0.75) + 'px');
-            note.style.setProperty('--dx4', dx + 'px');
-            note.style.setProperty('--rot1', ((Math.random()-0.5)*30) + 'deg');
-            note.style.setProperty('--rot2', ((Math.random()-0.5)*60) + 'deg');
-            note.style.setProperty('--rot3', ((Math.random()-0.5)*90) + 'deg');
-            note.style.setProperty('--rot4', ((Math.random()-0.5)*120) + 'deg');
-
-            document.body.appendChild(note);
-            setTimeout(function(){ if (note.parentNode) note.parentNode.removeChild(note); }, 3000);
-        }
-
-        function startNotes() {
-            stopNotes();
-            noteTimer = setInterval(function() {
-                spawnNote();
-                if (Math.random() > 0.5) setTimeout(spawnNote, 300 + Math.random() * 400);
-            }, 800);
-        }
-
-        function stopNotes() {
-            if (noteTimer) { clearInterval(noteTimer); noteTimer = null; }
-        }
-
-        btn.addEventListener('click', function() {
-            if (playing) {
-                audio.pause();
-                setPausedState();
-                stopNotes();
-            } else {
-                audio.play().catch(function(){});
-                setPlayingState();
-                startNotes();
-            }
-        });
-
-        prevBtn.addEventListener('click', function() {
-            loadSong(songIndex - 1);
-            audio.play().catch(function(){});
-            setPlayingState();
-            startNotes();
-        });
-
-        nextBtn.addEventListener('click', function() {
-            loadSong(songIndex + 1);
-            audio.play().catch(function(){});
-            setPlayingState();
-            startNotes();
-        });
-
-        audio.addEventListener('ended', function() {
-            loadSong(songIndex + 1);
-            audio.play().catch(function(){});
-            setPlayingState();
-            startNotes();
-        });
-
-        audio.addEventListener('timeupdate', function() {
-            if (audio.duration) {
-                var pct = (audio.currentTime / audio.duration) * 100;
-                progressBar.style.width = pct + '%';
-                timeCurrent.textContent = formatTime(audio.currentTime);
-            }
-        });
-
-        audio.addEventListener('loadedmetadata', function() {
-            timeTotal.textContent = formatTime(audio.duration);
-        });
-
-        progressWrap.addEventListener('click', function(e) {
-            var rect = progressWrap.getBoundingClientRect();
-            var pct = (e.clientX - rect.left) / rect.width;
-            if (audio.duration) audio.currentTime = pct * audio.duration;
-        });
-
-        /* Permanent matrix rain background inside player */
-        var matrixInterval = null;
-        function initMatrixBg() {
-            if (!entranceOverlay) return;
-            entranceOverlay.innerHTML = '';
-            var canvas = document.createElement('canvas');
-            entranceOverlay.appendChild(canvas);
-            var ctx = canvas.getContext('2d');
-            var w = entranceOverlay.offsetWidth || 320;
-            var h = entranceOverlay.offsetHeight || 400;
-            canvas.width = w;
-            canvas.height = h;
-            var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
-            var fontSize = 10;
-            var cols = Math.floor(w / fontSize);
-            var drops = [];
-            for (var i = 0; i < cols; i++) drops[i] = Math.random() * -20;
-
-            function draw() {
-                ctx.fillStyle = 'rgba(10, 10, 30, 0.12)';
-                ctx.fillRect(0, 0, w, h);
-                ctx.font = fontSize + 'px monospace';
-                for (var i = 0; i < drops.length; i++) {
-                    var text = chars.charAt(Math.floor(Math.random() * chars.length));
-                    ctx.fillStyle = Math.random() > 0.95 ? '#0ff' : '#0f0';
-                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                    if (drops[i] * fontSize > h && Math.random() > 0.95) drops[i] = 0;
-                    drops[i]++;
-                }
-            }
-
-            if (matrixInterval) clearInterval(matrixInterval);
-            matrixInterval = setInterval(draw, 45);
-        }
-
-        /* Start / stop matrix rain when player visibility changes */
-        function startMatrixBg() {
-            if (!matrixInterval) initMatrixBg();
-        }
-        function stopMatrixBg() {
-            if (matrixInterval) { clearInterval(matrixInterval); matrixInterval = null; }
-        }
-
-        document.getElementById('player-float-btn').addEventListener('click', function() {
-            player.classList.remove('player-collapsed');
-            this.classList.remove('visible');
-            startMatrixBg();
-        });
-
-        toggle.addEventListener('click', function() {
-            player.classList.add('player-collapsed');
-            document.getElementById('player-float-btn').classList.add('visible');
-            stopMatrixBg();
-        });
-
-        /* Start matrix rain immediately if player is visible */
-        if (!player.classList.contains('player-collapsed')) {
-            setTimeout(startMatrixBg, 100);
-        }
-
-        /* Auto-play on first user interaction */
-        function autoPlay() {
-            if (playing) return;
-            audio.play().then(function(){
-                setPlayingState();
-                startNotes();
-                document.removeEventListener('click', autoPlay);
-                document.removeEventListener('keydown', autoPlay);
-                document.removeEventListener('scroll', autoPlay);
-            }).catch(function(){});
-        }
-        document.addEventListener('click', autoPlay);
-        document.addEventListener('keydown', autoPlay);
-        document.addEventListener('scroll', autoPlay, {passive: true});
-    })();
-    </script>
-
     <!-- Footer-->
     <footer class="bg-bottom text-center py-5">
         <div class="container px-5">
@@ -933,7 +597,7 @@
         year: 2024, month: 'Dec.',
         jcr: null,
         doi: 'https://pdfhost.io/v/f6WFMFTgBW_IJDATICS_V13_No2',
-        cover: 'static/assets/img/ijdatics.png',
+        cover: 'static/assets/img/ijdatics.webp',
       },
       {
         type: 'journal',
@@ -944,7 +608,7 @@
         year: 2025, month: 'May',
         jcr: 'Q1', if: '7.5',
         doi: 'https://doi.org/10.1016/j.eswa.2025.126720',
-        cover: 'static/assets/img/eswa.jpg',
+        cover: 'static/assets/img/eswa.webp',
       },
       {
         type: 'journal',
@@ -955,7 +619,7 @@
         year: 2025, month: 'Jul.',
         jcr: 'Q1', if: '7.5',
         doi: 'https://doi.org/10.1016/j.ipm.2025.104153',
-        cover: 'static/assets/img/ipm.jpg',
+        cover: 'static/assets/img/ipm.webp',
       },
       {
         type: 'journal',
@@ -966,7 +630,7 @@
         year: 2025, month: 'Sep.',
         jcr: 'Q1', if: '8.6',
         doi: 'https://doi.org/10.1109/TSMC.2025.3576390',
-        cover: 'static/assets/img/tsmc.png',
+        cover: 'static/assets/img/tsmc.webp',
       },
       {
         type: 'journal',
@@ -977,7 +641,7 @@
         year: 2026, month: 'Apr.',
         jcr: 'Q1', if: '8.6',
         doi: 'https://doi.org/10.1109/TSMC.2026.3653874',
-        cover: 'static/assets/img/tsmc.png',
+        cover: 'static/assets/img/tsmc.webp',
       },
       {
         type: 'journal',
@@ -988,7 +652,7 @@
         year: 2026, month: 'Apr.',
         jcr: 'Q1', if: '6.6',
         doi: 'https://doi.org/10.1109/TETCI.2026.3654456',
-        cover: 'static/assets/img/tetci.png',
+        cover: 'static/assets/img/tetci.webp',
       },
       {
         type: 'journal',
@@ -999,7 +663,7 @@
         year: 2026, month: 'Aug.',
         jcr: 'Q1', if: '8.1',
         doi: 'https://doi.org/10.1109/TBDATA.2026.3668673',
-        cover: 'static/assets/img/tbd.jpg',
+        cover: 'static/assets/img/tbd.webp',
       },
       {
         type: 'journal',
@@ -1010,7 +674,7 @@
         jcr: 'Q1', if: '8.5',
         note: 'to appear',
         doi: 'https://doi.org/10.1109/TITS.2026.3688187',
-        cover: 'static/assets/img/tits.png',
+        cover: 'static/assets/img/tits.webp',
       },
       {
         type: 'journal',
@@ -1021,7 +685,7 @@
         jcr: 'Q1', if: '8.6',
         note: 'to appear',
         doi: 'https://ieeexplore.ieee.org/document/11594119',
-        cover: 'static/assets/img/tsmc.png',
+        cover: 'static/assets/img/tsmc.webp',
       },
       {
         type: 'journal',
@@ -1032,7 +696,7 @@
         jcr: 'Q1', if: '6.8',
         note: 'Accepted',
         doi: null,
-        cover: 'static/assets/img/jbhi.png',
+        cover: 'static/assets/img/jbhi.webp',
       },
       {
         type: 'journal',
@@ -1043,7 +707,7 @@
         jcr: 'Q1', if: '5.4',
         note: 'Accepted',
         doi: null,
-        cover: 'static/assets/img/tetc.png',
+        cover: 'static/assets/img/tetc.webp',
       },
       {
         type: 'conference',
@@ -1254,7 +918,7 @@
         : pub.title;
 
       const coverHtml = pub.cover
-        ? '<div class="pub-cover"><img src="' + pub.cover + '" alt="' + pub.venue + '"></div>'
+        ? '<div class="pub-cover"><img src="' + pub.cover + '" alt="' + pub.venue + '" loading="lazy" decoding="async"></div>'
         : '';
 
       return '<div class="pub-card" data-type="' + pub.type + '" data-jcr="' + (pub.jcr || '') + '">' +
@@ -1597,7 +1261,6 @@
         function loadVlogContent(path, container) {
             if (vlogContent[path]) {
                 container.innerHTML = vlogContent[path];
-                safeTypeset();
                 return;
             }
             container.innerHTML = '<p style="color:#888;">Loading...</p>';
@@ -1607,7 +1270,6 @@
                     var html = marked.parse(md);
                     vlogContent[path] = html;
                     container.innerHTML = html;
-                    safeTypeset();
                 })
                 .catch(function(e) {
                     container.innerHTML = '<p style="color:#c00;">Failed to load content.</p>';
@@ -1619,16 +1281,6 @@
             var overlay = document.getElementById('vlog-modal-overlay');
             overlay.classList.remove('active');
             document.body.style.overflow = '';
-        }
-
-        function safeTypeset() {
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                MathJax.typesetPromise().catch(function(e) {
-                    console.warn('MathJax typeset failed:', e);
-                });
-            } else if (window.MathJax && window.MathJax.typeset) {
-                try { MathJax.typeset(); } catch (e) { /* ignore */ }
-            }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1683,46 +1335,6 @@
 
     <!-- Matrix Rain Effect -->
     <script>
-    (function() {
-        var container = document.getElementById('snow-container');
-        if (!container) return;
-        var canvas = document.createElement('canvas');
-        canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;';
-        container.appendChild(canvas);
-        var ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,./<>?~';
-        var fontSize = 14;
-        var cols = Math.floor(canvas.width / fontSize);
-        var drops = [];
-        for (var i = 0; i < cols; i++) drops[i] = Math.random() * -100;
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(10, 10, 30, 0.06)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.font = fontSize + 'px monospace';
-            for (var i = 0; i < drops.length; i++) {
-                var text = chars.charAt(Math.floor(Math.random() * chars.length));
-                var isHead = Math.random() > 0.95;
-                ctx.fillStyle = isHead ? '#0ff' : '#0f0';
-                ctx.shadowColor = isHead ? '#0ff' : '#0f0';
-                ctx.shadowBlur = isHead ? 8 : 4;
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                ctx.shadowBlur = 0;
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            cols = Math.floor(canvas.width / fontSize);
-            while (drops.length < cols) drops.push(Math.random() * -100);
-        }
-        window.addEventListener('resize', resizeCanvas);
-        setInterval(drawMatrix, 45);
-    })();
-
     /* Top Section Matrix Rain */
     (function() {
         var topCanvas = document.getElementById('top-matrix-canvas');
@@ -1750,17 +1362,30 @@
             var cols = Math.floor(topCanvas.width / fontSize);
             for (var i = 0; i < cols; i++) {
                 var text = chars.charAt(Math.floor(Math.random() * chars.length));
-                var isHead = Math.random() > 0.95;
-                ctx.fillStyle = isHead ? '#0ff' : '#0f0';
-                ctx.shadowColor = isHead ? '#0ff' : '#0f0';
-                ctx.shadowBlur = isHead ? 8 : 4;
+                ctx.fillStyle = Math.random() > 0.95 ? '#0ff' : '#0f0';
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                ctx.shadowBlur = 0;
                 if (drops[i] * fontSize > topCanvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(drawTopMatrix, 45);
+
+        /* rAF loop throttled to ~30fps, paused while the tab is hidden */
+        var matrixRunning = !document.hidden;
+        var lastFrame = 0;
+        function matrixLoop(now) {
+            if (!matrixRunning) return;
+            if (now - lastFrame >= 33) {
+                lastFrame = now;
+                drawTopMatrix();
+            }
+            requestAnimationFrame(matrixLoop);
+        }
+        requestAnimationFrame(matrixLoop);
+        document.addEventListener('visibilitychange', function() {
+            var wasRunning = matrixRunning;
+            matrixRunning = !document.hidden;
+            if (matrixRunning && !wasRunning) requestAnimationFrame(matrixLoop);
+        });
     })();
 
     // Claude Mascots Animation — orange Claude characters swimming across the bottom
@@ -1779,53 +1404,8 @@
             el.style.animationDuration = dur + 's';
             el.style.animationDelay = (Math.random() * 5) + 's';
             el.style.opacity = 0.7 + Math.random() * 0.3;
-            var hueShift = Math.random() * 30 - 15;
-            el.style.filter = 'hue-rotate(' + hueShift + 'deg)';
             container.appendChild(el);
         }
-    })();
-    </script>
-
-    <!-- Global Click Particle Burst -->
-    <script>
-    (function() {
-        var colors = ['#0f0', '#0ff', '#1db954', '#2ee06e', '#adff2f'];
-        document.addEventListener('click', function(e) {
-            var burst = document.createElement('div');
-            burst.className = 'click-burst';
-            burst.style.left = e.clientX + 'px';
-            burst.style.top = e.clientY + 'px';
-            document.body.appendChild(burst);
-
-            /* Expanding ring */
-            var ring = document.createElement('div');
-            ring.className = 'click-ring';
-            burst.appendChild(ring);
-
-            /* Exploding particles */
-            var count = 12 + Math.floor(Math.random() * 8);
-            for (var i = 0; i < count; i++) {
-                var p = document.createElement('div');
-                p.className = 'click-particle';
-                var angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
-                var dist = 40 + Math.random() * 60;
-                var px = Math.cos(angle) * dist + 'px';
-                var py = Math.sin(angle) * dist + 'px';
-                p.style.setProperty('--px', px);
-                p.style.setProperty('--py', py);
-                var color = colors[Math.floor(Math.random() * colors.length)];
-                p.style.background = color;
-                p.style.boxShadow = '0 0 6px ' + color + ', 0 0 12px ' + color;
-                var size = 3 + Math.random() * 5;
-                p.style.width = size + 'px';
-                p.style.height = size + 'px';
-                burst.appendChild(p);
-            }
-
-            setTimeout(function() {
-                if (burst.parentNode) burst.parentNode.removeChild(burst);
-            }, 900);
-        });
     })();
     </script>
 

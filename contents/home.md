@@ -21,4 +21,3 @@ Dr. Jiang is expected to join Ningbo University, Ningbo, Zhejiang, in September 
 
 #### Research Interests
 Interpretable Machine Learning, Smart City, Multimodal Explanation, Anomaly Detection, Violence Detection, Explainable AI.
-
