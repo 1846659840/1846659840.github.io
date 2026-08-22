@@ -11,12 +11,24 @@
     <!-- Icon -->
     <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
 
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Bootstrap icons (self-hosted)-->
+    <link href="static/assets/icons/bootstrap-icons.css" rel="stylesheet" />
 
     <!-- Core theme CSS (includes Bootstrap)-->
     <link type="text/css" href="static/css/styles.css" rel="stylesheet" />
     <link type="text/css" href="static/css/main.css" rel="stylesheet" />
+
+    <!-- Start fetching content files now, in parallel with CSS/JS downloads,
+         so they don't wait for the deferred scripts to finish loading -->
+    <script>
+        (function () {
+            window.__contentPrefetch = {
+                config: fetch('contents/config.yml').then(function (r) { return r.text(); }),
+                homeEn: fetch('contents/home.md').then(function (r) { return r.text(); }),
+                homeZh: fetch('contents/home-zh.md').then(function (r) { return r.text(); })
+            };
+        })();
+    </script>
 
     <!-- Bootstrap core JS-->
     <script type="text/javascript" defer src="static/js/bootstrap.bundle.min.js"></script>
@@ -48,9 +60,9 @@
     </div>
     <script>
     (function(){
-        /* Skip the boot animation on repeat visits within the same session */
+        /* Skip the boot animation once per browser after the first visit */
         try {
-            if (sessionStorage.getItem('wdj-breach-done')) {
+            if (localStorage.getItem('wdj-breach-done')) {
                 document.getElementById('loading-screen').style.display = 'none';
                 return;
             }
@@ -135,7 +147,7 @@
         }
 
         function finishLoading() {
-            try { sessionStorage.setItem('wdj-breach-done', '1'); } catch (e) {}
+            try { localStorage.setItem('wdj-breach-done', '1'); } catch (e) {}
             glitch.classList.add('glitch-done');
             status.textContent = 'ACCESS GRANTED';
             status.style.color = '#0f0';

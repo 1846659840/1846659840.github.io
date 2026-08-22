@@ -1,7 +1,7 @@
-[![Google Scholar](https://img.shields.io/badge/Google-Scholar-blue?logo=googlescholar&logoColor=white)](https://scholar.google.com/citations?user=poeekH0AAAAJ)
-[![ResearchGate](https://img.shields.io/badge/ResearchGate-00CCBB?logo=researchgate&logoColor=white)](https://www.researchgate.net/profile/Wen-Dong-Jiang?ev=hdr_xprf)
-[![GitHub](https://img.shields.io/badge/GitHub-7WD1-black?logo=github)](https://github.com/7WD1)
-[![Email](https://img.shields.io/badge/Email-verified@ieee.org-red?logo=ieee&logoColor=white)](mailto:verified@ieee.org)
+[![Google Scholar](static/assets/img/badges/scholar.svg)](https://scholar.google.com/citations?user=poeekH0AAAAJ)
+[![ResearchGate](static/assets/img/badges/rg.svg)](https://www.researchgate.net/profile/Wen-Dong-Jiang?ev=hdr_xprf)
+[![GitHub](static/assets/img/badges/github.svg)](https://github.com/7WD1)
+[![Email](static/assets/img/badges/email.svg)](mailto:verified@ieee.org)
 
 姜文棟（IEEE 會員）於2021年獲得龍華科技大學多媒體與遊戲發展科學系學士學位，2023年獲得銘傳大學資訊工程學系碩士學位，2026年獲得淡江大學資訊工程學系博士學位。
 

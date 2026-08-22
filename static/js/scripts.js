@@ -6,6 +6,13 @@
 
     var homeContent = { en: '', zh: '' };
 
+    /* Use the head-start prefetch promises when available (they begin
+       downloading before the deferred scripts finish loading) */
+    function contentText(key, path) {
+        var pre = window.__contentPrefetch;
+        return pre && pre[key] ? pre[key] : fetch(path).then(function(r) { return r.text(); });
+    }
+
     function applyLang(lang) {
         var el = document.getElementById('home-md');
         if (el && homeContent[lang]) {
@@ -45,8 +52,7 @@
         }
 
         // Load config YAML
-        fetch(content_dir + config_file)
-            .then(function(response) { return response.text(); })
+        contentText('config', content_dir + config_file)
             .then(function(text) {
                 var yml = jsyaml.load(text);
                 Object.keys(yml).forEach(function(key) {
@@ -83,8 +89,8 @@
         var savedLang = localStorage.getItem('lang') || 'en';
 
         Promise.allSettled([
-            fetch(content_dir + 'home.md').then(function(r) { return r.text(); }).then(function(md) { homeContent.en = marked.parse(md); }),
-            fetch(content_dir + 'home-zh.md').then(function(r) { return r.text(); }).then(function(md) { homeContent.zh = marked.parse(md); })
+            contentText('homeEn', content_dir + 'home.md').then(function(md) { homeContent.en = marked.parse(md); }),
+            contentText('homeZh', content_dir + 'home-zh.md').then(function(md) { homeContent.zh = marked.parse(md); })
         ]).then(function() {
             applyLang(savedLang);
         }).catch(function(error) { console.warn('Content load error:', error); });
