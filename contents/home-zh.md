@@ -5,7 +5,7 @@
 
 姜文棟（IEEE 會員）於2021年獲得龍華科技大學多媒體與遊戲發展科學系學士學位，2023年獲得銘傳大學資訊工程學系碩士學位，2026年獲得淡江大學資訊工程學系博士學位。
 
-他的研究興趣集中在可解釋機器學習與可解釋人工智慧（XAI），應用領域涵蓋智慧城市、智慧交通系統、異常檢測與暴力檢測。他已在多個高影響力期刊發表論文，包括 IEEE Trans. Syst., Man, Cybern.: Syst.、IEEE Trans. Intell. Transp. Syst.、IEEE Trans. Big Data、IEEE J. Biomed. Health Inform.、IEEE Trans. Emerg. Topics Comput.、IEEE Trans. Emerg. Top. Comput. Intell.、Inf. Process. Manag. 以及 Expert Syst. Appl.。
+他的研究興趣集中在可解釋機器學習與可解釋人工智慧（XAI），應用領域涵蓋智慧城市、智慧交通系統、異常檢測與暴力檢測。他已在多個高影響力期刊發表論文，包括 IEEE Trans. Syst., Man, Cybern.: Syst.、IEEE Trans. Intell. Transp. Syst.、IEEE Trans. Big Data、IEEE J. Biomed. Health Inform.、IEEE Trans. Emerg. Topics Comput.、IEEE Trans. Emerg. Top. Comput. Intell.、IEEE Internet Things J.、Inf. Process. Manag. 以及 Expert Syst. Appl.。
 
 姜博士預計於2026年9月加入位於浙江寧波的寧波大學。目前，姜博士正在尋找一群志同道合的人，一起探索可解釋的秘密，可透過 [wendongjiang@ieee.org](mailto:wendongjiang@ieee.org) 進行聯繫。
 
